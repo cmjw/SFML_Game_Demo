@@ -1,17 +1,17 @@
 #include "State.h"
 
-State::State()
-{
+State::State(sf::RenderWindow* window) {
+	this->window = window;
 }
 
 State::~State()
 {
 }
 
-void State::update()
+void State::update(const float& dt)
 {
 }
 
-void State::render()
+void State::render(sf::RenderTarget* target)
 {
 }
