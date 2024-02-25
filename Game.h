@@ -23,11 +23,13 @@ public:
 	virtual ~Game();
 
 	void update();
+	void render();
+	void run();
+
 	void updateDt();
 	void updateSFMLEvents();
 
-	void render();
-	void run();
+	void endApplication();
 };
 
 #endif

@@ -55,21 +55,20 @@ void Game::update() {
 
 	if (!this->states.empty()) {
 		this->states.top()->update(this->dt);
-	}
-}
 
-/*
-* Update dt with time taken to update and render one frame
-*/
-void Game::updateDt() {
-	this ->dt = this->dtClock.restart().asSeconds();
-}
+		if (this->states.top()->getQuit()) {
+			// save something, play animation before quitting
+			this->states.top()->endState();
 
-void Game::updateSFMLEvents() {
-	while (window->pollEvent(sfEvent)) {
-		if (sfEvent.type == sf::Event::Closed) {
-			window->close();
+			delete this->states.top();
+			this->states.pop();
 		}
+	}
+
+	// application end
+	else {
+		this->endApplication();
+		this->window->close();
 	}
 }
 
@@ -92,5 +91,26 @@ void Game::run() {
 
 	}
 }
+
+/*
+* Update dt with time taken to update and render one frame
+*/
+void Game::updateDt() {
+	this ->dt = this->dtClock.restart().asSeconds();
+}
+
+void Game::updateSFMLEvents() {
+	while (window->pollEvent(sfEvent)) {
+		if (sfEvent.type == sf::Event::Closed) {
+			window->close();
+		}
+	}
+}
+
+void Game::endApplication() {
+	std::cout << "Ending Application" << "\n";
+}
+
+
 
 

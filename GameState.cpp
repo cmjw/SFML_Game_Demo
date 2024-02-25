@@ -7,14 +7,20 @@ GameState::~GameState()
 {
 }
 
-void GameState::endState()
-{
-}
-
 void GameState::update(const float& dt) {
-	std::cout << "Game states" << "\n";
+	this->updateKeybinds(dt);
+
+	this->player.update(dt);
 }
 
-void GameState::render(sf::RenderTarget* target)
-{
+void GameState::render(sf::RenderTarget* target) {
+	this->player.render(this->window);
+}
+
+void GameState::endState() {
+	std::cout << "Ending Game State" << "\n";
+}
+
+void GameState::updateKeybinds(const float& dt) {
+	this->checkForQuit();
 }
